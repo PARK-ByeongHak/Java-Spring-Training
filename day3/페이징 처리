@@ -16,7 +16,8 @@ totalPageCount 는 총 게시글의 수(totalListCount) / 한 화면에 출력�
 viewFirstPage 는
 (((현재 페이지 번호(currentPageNo) - 1) / 한 화면에 출력되는 페이지의 수(countPerPage)) * 한 화면에 출력되는 페이지의 수(countPerPage)) + 1에 값을 저장해야 함.
 연산되는 내용에 1을 빼고 더하는 이유는 한 화면에 출력되는 페이지 수(countPerPage)가 10일 때 페이징 네비게이션에 출력되는 페이지 번호는 1~10, 11~20, 21~30 처럼 출력되고,
-마지막 페이지의 번호(viewLastPage)를 한 화면에 출력되는 페이지의 수(countPerPage)로 나누었을 때 첫 페이지의 번호(viewFirstPage)부터 마지막 페이지의 번호(viewLastPage) 전에 번호보다 값이 1 많음.
+마지막 페이지의 번호(viewLastPage)를 한 화면에 출력되는 페이지의 수(countPerPage)로 나누었을 때
+첫 페이지의 번호(viewFirstPage)부터 마지막 페이지의 번호(viewLastPage) 전에 번호보다 값이 1 많음.
 그래서 한 화면에 출력되는 페이지 수(countPerPage)로 나누기 전에 1을 빼고 곱하기 전에 1을 더해주어야 함.
   
 viewLastPage 는 (첫 페이지 번호(viewFirstPage) + 한 화면에 출력되는 페이지 수(countPerPage)) - 1에 값을 저장해야 함.
