@@ -1,0 +1,35 @@
+페이징 처리를 위한 변수 설명
+
+pagination : 페이징 네비게이션 결과 값을 저장할 변수
+functionName : 페이지의 번호를 클릭했을 때 호출되는 자바스크립트 함수명 또는 게시글 조회를 요청하는 함수명을 저장할 변수
+currentPageNo : 현재 화면에 출력되고 있는 페이지 번호 또는 페이지의 번호를 클릭했을 때에 번호를 저장할 변수
+countPerList : 한 화면에 출력되는 게시글의 수를 저장할 변수
+countPerPage : 한 화면에 출력되는 페이지의 수를 저장할 변수
+totalListCount : 총 게시글의 수를 저장할 변수
+totalPageCount : 총 페이지의 수를 저장할 변수
+viewFirstPage :  첫 페이지 번호를 저장할 변수
+viewLastPage : 마지막 페이지 번호를 저장할 변수
+
+totalListCount 는 총 게시글의 수를 구하는 쿼리를 추가하여 결과 값을 저장해야 합니다. 
+totalPageCount 는 총 게시글의 수(totalListCount) / 한 화면에 출력되는 페이지의 수(countPerPage) 에 값을 저장하면 되는데, 나머지가 존재하는 경우는 1을 더해주어야 함.
+ 
+viewFirstPage 는
+(((현재 페이지 번호(currentPageNo) - 1) / 한 화면에 출력되는 페이지의 수(countPerPage)) * 한 화면에 출력되는 페이지의 수(countPerPage)) + 1에 값을 저장해야 함.
+연산되는 내용에 1을 빼고 더하는 이유는 한 화면에 출력되는 페이지 수(countPerPage)가 10일 때 페이징 네비게이션에 출력되는 페이지 번호는 1~10, 11~20, 21~30 처럼 출력되고,
+마지막 페이지의 번호(viewLastPage)를 한 화면에 출력되는 페이지의 수(countPerPage)로 나누었을 때 첫 페이지의 번호(viewFirstPage)부터 마지막 페이지의 번호(viewLastPage) 전에 번호보다 값이 1 많음.
+그래서 한 화면에 출력되는 페이지 수(countPerPage)로 나누기 전에 1을 빼고 곱하기 전에 1을 더해주어야 함.
+  
+viewLastPage 는 (첫 페이지 번호(viewFirstPage) + 한 화면에 출력되는 페이지 수(countPerPage)) - 1에 값을 저장해야 함.
+첫 페이지 번호(viewFirstPage)가 1, 11, 21처럼 일의 자리가 1로 시작하므로 한 화면에 출력되는 페이지 수(countPerPage)를 더한 후 1을 빼주어야 함.
+그리고 마지막 페이지 번호(viewLastPage)에 경우 총 페이지의 수(totalPageCount)를 고려해야 됨.
+예를 들어, 총 게시글 수(totalListCount)가 150개인 경우 총 페이지의 수(totalPageCount)는 15가 되고, 마지막 페이지 번호(viewLastPage)는 10과 20이 된다.
+이처럼 마지막 페이지 번호(ViewLastPage)가 총 페이지 번호(totalPageCount)보다 큰 경우는 16~20 페이지에는 출력할 수 있는 게시글이 없기 때문에
+마지막 페이지 번호(viewLastPage)에 총 페이지 번호(totalPageCount)를 저장해야 함.
+
+totalFirstPage : 전체 페이지 중에 처음 페이지 번호를 저장할 변수
+totalLastPage : 전체 페이지 중에 마지막 페이지 번호를 저장할 변수
+prePerPage : 이전 페이지 네이게이션 중에 처음 페이지 번호를 저장할 변수
+nextPerPage : 다음 페이지 네비게이션 중에 처음 페이지 번호를 저장할 변수
+
+페이지 번호를 설정하는 부분은 첫 페이지 번호, 마지막 페이지 번호만 알고 있다면 for을 사용하여 구현할 수 있음.
+for문 안에 if문은 현재 페이지 번호에 스타일을 추가하기 위해 추가. a태그 구현 시에 functionName을 추가한 것은 페이지 번호를 클릭 시에 게시판 조회 함수를 호출하기 위해 추가함.
